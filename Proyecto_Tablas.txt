@@ -1,0 +1,82 @@
+CREATE TABLE empleado
+(ID serial,
+ work_year int,
+ 
+ nivel_experiencia varchar(2),
+ 
+ employment_type varchar(2),
+ job_title varchar(60),
+ salary int,
+ salary_currency varchar(3),
+ salary_in_usd int,
+ 
+ pais varchar(2),
+ 
+ remote_ratio int,
+ company_location varchar(2),
+ company_size varchar(1),
+ PRIMARY KEY (ID),
+ FOREIGN KEY (nivel_experiencia) references nivel_experiencia
+)
+
+COPY public.empresa (id, pais, tamanio)
+FROM 'C:/Users/sofia/DOWNLO~1/empresa.csv' DELIMITER ';' CSV HEADER;
+
+COPY public.tipo_empleo (siglas, significado)
+FROM 'C:/Users/sofia/DOWNLO~1/TIPO_E~1.CSV'
+DELIMITER ';' CSV HEADER;
+
+COPY public.nivel_experiencia (siglas, significado)
+FROM 'C:/Users/sofia/DOWNLO~1/NIVEL_~1.CSV'
+DELIMITER ';' CSV HEADER;
+
+COPY public.empleo (id, anio, nivel_experiencia, tipo_empleo, nombre_trabajo, salario, moneda, salario_usd, promocion_remoto)
+FROM 'C:/Users/sofia/DOWNLO~1/empleo.csv'
+DELIMITER ';' CSV HEADER;
+
+COPY public.empleado (id, work_year, nivel_experiencia, employment_type, job_title, salary, salary_currency, salary_in_usd, pais, remote_ratio, company_location, company_size)
+FROM 'C:/Users/sofia/DOWNLO~1/Empleado.csv'
+DELIMITER ';' CSV HEADER;
+
+
+
+
+select empleado.ID as id_empleado ,empresa.Id as id_empresa,empleo.ID as id_empleo
+FROM
+((empresa INNER JOIN empleado ON empresa.pais=empleado.company_location AND empresa.tamanio=empleado.company_size )
+INNER JOIN empleo ON empleo.anio=empleado.work_year AND
+empleo.nivel_experiencia =empleado.nivel_experiencia AND
+empleo.tipo_empleo=empleado.employment_type AND
+empleo.nombre_trabajo =empleado.job_title AND
+empleo.salario = empleado.salary AND
+empleo.moneda = empleado.salary_currency AND
+empleo.salario_usd = empleado.salary_in_usd AND
+empleo.promocion_remoto = empleado.remote_ratio)
+ORDER BY empleado.ID
+
+ALTER TABLE empleado DROP COLUMN work_year;
+ALTER TABLE empleado DROP COLUMN nivel_experiencia;
+ALTER TABLE empleado DROP COLUMN employment_type;
+ALTER TABLE empleado DROP COLUMN job_title;
+ALTER TABLE empleado DROP COLUMN salary;
+ALTER TABLE empleado DROP COLUMN salary_currency;
+ALTER TABLE empleado DROP COLUMN salary_in_usd;
+ALTER TABLE empleado DROP COLUMN remote_ratio;
+ALTER TABLE empleado DROP COLUMN company_location;
+ALTER TABLE empleado DROP COLUMN company_size;
+
+CREATE TABLE trabaja(
+id_empleado int,
+id_empresa int,
+id_empleo int,
+PRIMARY KEY(id_empleado),
+FOREIGN KEY(id_empleado) references empleado(ID),
+FOREIGN KEY(id_empresa) references empresa(ID),
+FOREIGN KEY(id_empleo) references empleo(ID)
+)
+
+
+COPY
+public.trabaja (id_empleado, id_empresa, id_empleo)
+FROM 'C:/Users/sofia/DOWNLO~1/Trabaja.csv'
+DELIMITER ',' CSV HEADER;
