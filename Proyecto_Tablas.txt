@@ -1,17 +1,43 @@
+CREATE TABLE empresa
+(ID serial,
+pais varchar(2),
+tamanio varchar(1),
+primary key(ID));
+
+CREATE TABLE nivel_experiencia
+(siglas varchar(2),
+significado varchar(40),
+PRIMARY KEY(siglas));
+
+CREATE TABLE tipo_empleo
+(siglas varchar(2),
+significado varchar(40),
+PRIMARY KEY(siglas));
+
+CREATE TABLE empleo
+(ID serial,
+anio int,
+nivel_experiencia varchar(2),
+tipo_empleo varchar(2) ,
+nombre_trabajo varchar(60),
+salario int,
+moneda varchar(3),
+salario_usd int,
+promocion_remoto int,
+PRIMARY KEY(ID),
+FOREIGN KEY(nivel_experiencia) references nivel_experiencia,
+FOREIGN KEY(tipo_empleo) references tipo_empleo);
+
 CREATE TABLE empleado
 (ID serial,
  work_year int,
- 
  nivel_experiencia varchar(2),
- 
  employment_type varchar(2),
  job_title varchar(60),
  salary int,
  salary_currency varchar(3),
  salary_in_usd int,
- 
  pais varchar(2),
- 
  remote_ratio int,
  company_location varchar(2),
  company_size varchar(1),
