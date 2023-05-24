@@ -106,3 +106,46 @@ COPY
 public.trabaja (id_empleado, id_empresa, id_empleo)
 FROM 'C:/Users/sofia/DOWNLO~1/Trabaja.csv'
 DELIMITER ',' CSV HEADER;
+
+
+
+-- Consultas de análisis
+
+/*Determinar de que forma el lugar en donde se situa una empresa y 
+su tamaño clasifica los salarios obtenidos por sus trabajadores,
+destacando en cuales países y tipos de compañias se
+presentan ofertas mejor remuneradas para los trabajadores.*/
+
+
+
+select  rank() over (order by avg(salario_usd) desc), empresa.id, pais, tamanio,round(avg(salario_usd),3)
+	from (empresa inner join trabaja on empresa.id = trabaja.id_empresa)
+	inner join empleo on empleo.id = trabaja.id_empleo
+	group by empresa.id;
+	
+select  rank() over (order by avg(salario_usd) desc), pais,round(avg(salario_usd),3)
+	from (empresa inner join trabaja on empresa.id = trabaja.id_empresa)
+	inner join empleo on empleo.id = trabaja.id_empleo
+	group by pais;
+	
+select  rank() over (order by avg(salario_usd) desc), tamanio,round(avg(salario_usd),3)
+	from (empresa inner join trabaja on empresa.id = trabaja.id_empresa)
+		inner join empleo on empleo.id = trabaja.id_empleo
+	group by tamanio;
+	
+	
+	
+/*Analizar según los datos en que nivel de experiencia hay más trabajadores 
+y en empleados de que nivel de experiencias las empresas suelen invertir más,
+para de esta forma poder concluir según oportunidades de empleo y expectativas
+salariales, cual es el mejor grado de experticia a adquirir, teniendo en cuenta
+que avanzar en conocimientos siempre implica un esfuerzo e inversión para un
+científico de datos.*/
+
+select nivel_experiencia, sum(salario_usd),count(*) 
+	from ((empresa inner join trabaja on empresa.id = trabaja.id_empresa)
+		inner join empleo on empleo.id = trabaja.id_empleo)
+		inner join empleado on empleado.id = trabaja.id_empleado
+	group by nivel_experiencia;
+
+
