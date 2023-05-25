@@ -158,7 +158,10 @@ Identificar mediante el nombre de los cargos en cuales sectores de la ciencia
 de datos se tiene una mejor expectativa salarial y observar si existe una
 diferencia significativa entre cargos asociados 
 */
--- top 5 empleos mas demandados
+
+-- top 5 empleos mas demandados. 
+--Puede ser un grafico de barras
+
 SELECT nombre_trabajo, round(count(*),1) AS cantidad_empleos
 FROM empleo
 GROUP BY nombre_trabajo
@@ -166,7 +169,9 @@ ORDER BY cantidad_empleos DESC
 LIMIT 5;
 
 
--- top 5 de empleos por salario promedio
+-- top 5 de empleos por salario promedio. 
+--Puede ser un gráfico de barras
+
 SELECT nombre_trabajo, round(AVG(salario_usd),1) AS salario_promedio
 FROM empleo
 GROUP BY nombre_trabajo
@@ -175,6 +180,7 @@ LIMIT 5;
 
 
 -- promedio salarios de las tres profesiones màs importantes
+--Puede ser un gráfico de barras
 Select 'Ingeiero de datos' as Nombre_trabajo, ROUND(AVG(salario_usd), 1) AS Salario_promedio
 from empleo
 where nombre_trabajo LIKE '%Data Engineer%'
@@ -196,6 +202,8 @@ futuro, en especial en una industria de después de la pandemia de 2020 y 2021.
 Tomando en cuenta la agrupación por tipo de empleo, nombre de empleo y
 nivel de experiencia necesario, con el proposito de mantener una
 homogeneidad.
+
+--se podrían hacer 3 graficas de lineas, una por cada consulta. Puedes hacelas todas o las que veas mas relevantes  
 
 */
 select anio, count(*) --hay poquita info de la pandemia
