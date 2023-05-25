@@ -158,19 +158,21 @@ Identificar mediante el nombre de los cargos en cuales sectores de la ciencia
 de datos se tiene una mejor expectativa salarial y observar si existe una
 diferencia significativa entre cargos asociados 
 */
--- top 10 empleos mas demandados
-SELECT nombre_trabajo, round(count(*),1) AS cantidad
+-- top 5 empleos mas demandados
+SELECT nombre_trabajo, round(count(*),1) AS cantidad_empleos
 FROM empleo
 GROUP BY nombre_trabajo
-ORDER BY cantidad DESC
+ORDER BY cantidad_empleos DESC
 LIMIT 5;
 
--- top 10 de empleos por salario promedio
+
+-- top 5 de empleos por salario promedio
 SELECT nombre_trabajo, round(AVG(salario_usd),1) AS salario_promedio
 FROM empleo
 GROUP BY nombre_trabajo
 ORDER BY salario_promedio DESC
 LIMIT 5;
+
 
 -- promedio salarios de las tres profesiones màs importantes
 Select 'Ingeiero de datos' as Nombre_trabajo, ROUND(AVG(salario_usd), 1) AS Salario_promedio
