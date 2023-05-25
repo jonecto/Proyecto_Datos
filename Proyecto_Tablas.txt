@@ -149,3 +149,80 @@ select nivel_experiencia, sum(salario_usd),count(*)
 	group by nivel_experiencia;
 
 
+
+
+
+--POSIBLE ANÁLISIS 5:
+/* 
+Identificar mediante el nombre de los cargos en cuales sectores de la ciencia
+de datos se tiene una mejor expectativa salarial y observar si existe una
+diferencia significativa entre cargos asociados 
+*/
+-- top 10 empleos mas demandados
+SELECT nombre_trabajo, round(count(*),1) AS cantidad
+FROM empleo
+GROUP BY nombre_trabajo
+ORDER BY cantidad DESC
+LIMIT 5;
+
+-- top 10 de empleos por salario promedio
+SELECT nombre_trabajo, round(AVG(salario_usd),1) AS salario_promedio
+FROM empleo
+GROUP BY nombre_trabajo
+ORDER BY salario_promedio DESC
+LIMIT 5;
+
+-- promedio salarios de las tres profesiones màs importantes
+Select 'Ingeiero de datos' as Nombre_trabajo, ROUND(AVG(salario_usd), 1) AS Salario_promedio
+from empleo
+where nombre_trabajo LIKE '%Data Engineer%'
+union
+select 'Cientifico de datos' AS Nombre_trabajo, ROUND(AVG(salario_usd), 1) AS Salario_promedio
+from empleo
+where nombre_trabajo LIKE '%Data Scientist%'
+union
+select 'Analista de datos' AS Nombre_trabajo, ROUND(AVG(salario_usd), 1) AS Salario_promedio
+from empleo
+where nombre_trabajo LIKE '%Analyst%';
+
+
+--POSIBLE ANÁLISIS 6:
+/* 
+Estudiar si existe un aumento o decrecimiento promedio de los salarios a
+través de los 4 años estudiados, para tener una idea de proyección para el
+futuro, en especial en una industria de después de la pandemia de 2020 y 2021.
+Tomando en cuenta la agrupación por tipo de empleo, nombre de empleo y
+nivel de experiencia necesario, con el proposito de mantener una
+homogeneidad.
+
+*/
+select anio, count(*) --hay poquita info de la pandemia
+from empleo
+group by  anio;
+
+--sectores y años, lineas
+select tipo_empleo,
+       round(avg(CASE WHEN anio = 2020 THEN salario_usd END), 1) AS salario_promedio_2020, 
+       round(avg(CASE WHEN anio = 2021 THEN salario_usd END), 1) AS salario_promedio_2021,
+	   round(avg(CASE WHEN anio = 2022 THEN salario_usd END), 1) AS salario_promedio_2022,
+	   round(avg(CASE WHEN anio = 2023 THEN salario_usd END), 1) AS salario_promedio_2023
+from empleo
+group by tipo_empleo;
+
+--experiencia y tipo, lineas
+select tipo_empleo,
+       round(avg(CASE WHEN nivel_experiencia = 'SE' THEN salario_usd END), 1) AS Salario_senior, 
+       round(avg(CASE WHEN nivel_experiencia = 'MI' THEN salario_usd END), 1) AS Salario_mid,
+	   round(avg(CASE WHEN nivel_experiencia = 'EN' THEN salario_usd END), 1) AS Salario_junior,
+	   round(avg(CASE WHEN nivel_experiencia = 'EX' THEN salario_usd END), 1) AS salario_ejecutivo
+from empleo
+group by tipo_empleo;
+
+--años y experiencia,lineas 
+select nivel_experiencia,
+       round(avg(case when anio = 2020 then salario_usd END), 1) AS salario_promedio_2020, 
+       round(avg(case when anio = 2021 THEN salario_usd END), 1) AS salario_promedio_2021,
+	   round(avg(case when anio = 2022 THEN salario_usd END), 1) AS salario_promedio_2022,
+	   round(avg(case when anio = 2023 THEN salario_usd end), 1) AS salario_promedio_2023
+from empleo
+group by nivel_experiencia;
