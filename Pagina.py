@@ -62,21 +62,6 @@ try:
     graf8 = px.histogram(rows, x = 0,y=2, pattern_shape = 1, pattern_shape_sequence = ['\\', '.', '+', '/', '.'], color_discrete_sequence = ["#34a0a4"], title = "Salario promedio por título de trabajo en nivel de entrada")
     graf9 = px.histogram(rows, x = 0,y=1, pattern_shape = 1, pattern_shape_sequence = ['\\', '.', '+', '/', '.'], color_discrete_sequence = ["#34a0a4"], title = "Cantidad de tipo de empleo en nivel de entrada")
 
-    #ESCENARIO 5
-    cursor.execute('''select promocion_remoto, count(*), round(avg(salario_usd),2)
-    from empleo
-    group by promocion_remoto;''')
-    rows = cursor.fetchall()
-    graf8 = px.histogram(rows, x = 0,y=2, pattern_shape = 1, pattern_shape_sequence = ['\\', '.', '+', '/', '.'], color_discrete_sequence = ["#34a0a4"], title = "Salario promedio por título de trabajo en nivel de entrada")
-    graf9 = px.histogram(rows, x = 0,y=1, pattern_shape = 1, pattern_shape_sequence = ['\\', '.', '+', '/', '.'], color_discrete_sequence = ["#34a0a4"], title = "Cantidad de tipo de empleo en nivel de entrada")
-
-    #ESCENARIO 6
-    cursor.execute('''select promocion_remoto, count(*), round(avg(salario_usd),2)
-    from empleo
-    group by promocion_remoto;''')
-    rows = cursor.fetchall()
-    graf8 = px.histogram(rows, x = 0,y=2, pattern_shape = 1, pattern_shape_sequence = ['\\', '.', '+', '/', '.'], color_discrete_sequence = ["#34a0a4"], title = "Salario promedio por título de trabajo en nivel de entrada")
-    graf9 = px.histogram(rows, x = 0,y=1, pattern_shape = 1, pattern_shape_sequence = ['\\', '.', '+', '/', '.'], color_discrete_sequence = ["#34a0a4"], title = "Cantidad de tipo de empleo en nivel de entrada")
 
 
     app.layout = html.Div(children = [
