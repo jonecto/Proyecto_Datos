@@ -16,6 +16,7 @@ try:
     rows = cursor.fetchall()
     app = Dash(__name__)
     fig = px.bar(rows, x = 0, y = 1, pattern_shape = 1, pattern_shape_sequence = ['\\', '.', '+', '/', '.'], color_discrete_sequence = ["#34a0a4"], title = "productos por editorial")
+   
    #ESCENARIO 1
     cursor.execute("select  rank() over (order by avg(salario_usd) desc), empresa.id, pais, tamanio,round(avg(salario_usd),3) from (empresa inner join trabaja on empresa.id = trabaja.id_empresa) inner join empleo on empleo.id = trabaja.id_empleo group by empresa.id;")
     rows = cursor.fetchall()
@@ -51,21 +52,52 @@ try:
     where nivel_experiencia='EN'
     group by cube(nombre_trabajo, tipo_empleo);''')
     rows = cursor.fetchall()
-    graf6 = px.histogram(rows, x = 1,y = 3 , pattern_shape = 1, pattern_shape_sequence = ['\\', '.', '+', '/', '.'], color_discrete_sequence = ["#34a0a4"], title = "Salario promedio por título de trabajo en nivel de entrada")
-    graf7 = px.histogram(rows, x = 2,y = 3, pattern_shape = 1, pattern_shape_sequence = ['\\', '.', '+', '/', '.'], color_discrete_sequence = ["#34a0a4"], title = "Cantidad de empleos por tipo en nivel de entrada")
+    graf6 = px.histogram(rows, x = 1,y = 3 , pattern_shape = 1, pattern_shape_sequence = ['\\', '.', '+', '/', '.'], color_discrete_sequence = ["#34a0a4"], title = "Salario promedio por título de trabajo para junior")
+    graf7 = px.histogram(rows, x = 2,y = 3, pattern_shape = 1, pattern_shape_sequence = ['\\', '.', '+', '/', '.'], color_discrete_sequence = ["#34a0a4"], title = "Cantidad de empleos por tipo en capacitación junior")
 
     #ESCENARIO 4
     cursor.execute('''select promocion_remoto, count(*), round(avg(salario_usd),2)
     from empleo
     group by promocion_remoto;''')
     rows = cursor.fetchall()
-    graf8 = px.histogram(rows, x = 0,y=2, pattern_shape = 1, pattern_shape_sequence = ['\\', '.', '+', '/', '.'], color_discrete_sequence = ["#34a0a4"], title = "Salario promedio por título de trabajo en nivel de entrada")
-    graf9 = px.histogram(rows, x = 0,y=1, pattern_shape = 1, pattern_shape_sequence = ['\\', '.', '+', '/', '.'], color_discrete_sequence = ["#34a0a4"], title = "Cantidad de tipo de empleo en nivel de entrada")
+    graf8=fig = px.pie(rows, values=2, names=0, title='Population of European continent')
+    graf9 = px.histogram(rows, x = 0,y=1, pattern_shape = 1, pattern_shape_sequence = ['\\', '.', '+', '/', '.'], color_discrete_sequence = ["#34a0a4"], title = "Cantidad de empleos por modalidad en nivel de entrada")
 
+    #ESCENARIO 5
+    cursor.execute('''SELECT nombre_trabajo, round(count(*),1) AS cantidad_empleos
+    FROM empleo
+    GROUP BY nombre_trabajo
+    ORDER BY cantidad_empleos DESC
+    LIMIT 5;''')
+    rows = cursor.fetchall()
+    graf10 = px.histogram(rows, x = 0,y=1, pattern_shape = 1, pattern_shape_sequence = ['\\', '.', '+', '/', '.'], color_discrete_sequence = ["#34a0a4"], title = "top 5 empleos mas demandados.")
+    
+    #ESCENARIO 6
+    cursor.execute('''select nivel_experiencia, anio,
+        round(avg(salario_usd), 1) salario_promedio 
+        from empleo
+        group by nivel_experiencia, anio
+        order by nivel_experiencia;''')
+    rows = cursor.fetchall()
+    graf11 = px.line(rows, x = 0,y=2, color=1)
+    
+    cursor.execute('''select tipo_empleo,
+       round(avg(CASE WHEN nivel_experiencia = 'SE' THEN salario_usd END), 1) AS Salario_senior, 
+       round(avg(CASE WHEN nivel_experiencia = 'MI' THEN salario_usd END), 1) AS Salario_mid,
+	   round(avg(CASE WHEN nivel_experiencia = 'EN' THEN salario_usd END), 1) AS Salario_junior,
+	   round(avg(CASE WHEN nivel_experiencia = 'EX' THEN salario_usd END), 1) AS salario_ejecutivo
+        from empleo
+        group by tipo_empleo;''')
+    rows = cursor.fetchall()
+    print(rows)
+    graf12 = px.bar(rows, x = 0,y=1, pattern_shape = 1, pattern_shape_sequence = ['\\', '.', '+', '/', '.'], color_discrete_sequence = ["#34a0a4"], title = "Promedio de salario por tipo de empleo para Senior")
+    graf13 = px.bar(rows, x = 0,y=2, pattern_shape = 1, pattern_shape_sequence = ['\\', '.', '+', '/', '.'], color_discrete_sequence = ["#34a0a4"], title = "Promedio de salario por tipo de empleo para Mid")
+    graf14 = px.bar(rows, x = 0,y=3, pattern_shape = 1, pattern_shape_sequence = ['\\', '.', '+', '/', '.'], color_discrete_sequence = ["#34a0a4"], title = "Promedio de salario por tipo de empleo para junior")
+    graf15 = px.bar(rows, x = 0,y=4, pattern_shape = 1, pattern_shape_sequence = ['\\', '.', '+', '/', '.'], color_discrete_sequence = ["#34a0a4"], title = "Promedio de salario por tipo de empleo para executive")
 
 
     app.layout = html.Div(children = [
-        html.H1(children = 'Gráfico Edición Cantidad'),
+        html.H1(children = 'ANALISIS SALARIAL DE CIENTIFICOS DE DATOS PERIODO 2020-2023'),
         html.H3(children = 'ESCENARIO 1'),
         html.Div(children = '''
             Determinar de que forma el lugar en donde se situa una empresa y su tamaño clasifica los salarios obtenidos por sus trabajadores,
@@ -83,8 +115,18 @@ try:
             id = 'g3',
             figure = graf3
         ),
-        
-        #Escenario 2 codigo
+        #Primer bloque de analisis
+        html.Div(children=[
+            html.H3(children = 'Análisis:'),
+            html.Div(children = '''
+                     Nicolás: 
+        '''),html.Div(children = '''
+                     Sofía: 
+        '''),html.Div(children = '''
+                     Victor: 
+        '''),
+        ]),
+    #Escenario 2 codigo
         
         html.H3(children = 'ESCENARIO 2'),
         html.Div(children = '''
@@ -100,8 +142,18 @@ try:
             id = 'g5',
             figure = graf5
         ),
-        
-        #Escenario 3 codigo
+        #Segundo bloque de analisis
+        html.Div(children=[
+            html.H3(children = 'Análisis:'),
+            html.Div(children = '''
+                     Nicolás: 
+        '''),html.Div(children = '''
+                     Sofía: 
+        '''),html.Div(children = '''
+                     Victor: 
+        '''),
+        ]),
+    #Escenario 3 codigo
         
         html.H3(children = 'ESCENARIO 3'),
         html.Div(children = '''
@@ -119,7 +171,18 @@ try:
             id = 'g7',
             figure = graf7
         ),
-        #Escenario 4 codigo
+        #Tercer bloque de analisis
+        html.Div(children=[
+            html.H3(children = 'Análisis:'),
+            html.Div(children = '''
+                     Nicolás: 
+        '''),html.Div(children = '''
+                     Sofía: 
+        '''),html.Div(children = '''
+                     Victor: 
+        '''),
+        ]),
+    #Escenario 4 codigo
         
         html.H3(children = 'ESCENARIO 4'),
         html.Div(children = '''
@@ -138,6 +201,93 @@ try:
             id = 'g9',
             figure = graf9
         ),
+        #Cuarto bloque de analisis
+        html.Div(children=[
+            html.H3(children = 'Análisis:'),
+            html.Div(children = '''
+                     Nicolás: 
+        '''),html.Div(children = '''
+                     Sofía: 
+        '''),html.Div(children = '''
+                     Victor: 
+        '''),
+        ]),
+    #Escenario 5 codigo
+        
+        html.H3(children = 'ESCENARIO 5'),
+        html.Div(children = '''
+           Identificar mediante el nombre de los cargos en cuales sectores de la ciencia
+            de datos se tiene una mejor expectativa salarial y observar si existe una
+            diferencia significativa entre cargos asociados 
+        '''),
+        dcc.Graph(
+            id = 'g10',
+            figure = graf10
+        ),
+        #Quinto bloque de analisis
+        html.Div(children=[
+            html.H3(children = 'Análisis:'),
+            html.Div(children = '''
+                     Nicolás: 
+        '''),html.Div(children = '''
+                     Sofía: 
+        '''),html.Div(children = '''
+                     Victor: 
+        '''),
+        ]),
+        
+    #Escenario 6 codigo
+        
+        html.H3(children = 'ESCENARIO 6'),
+        html.Div(children = '''
+           Identificar mediante el nombre de los cargos en cuales sectores de la ciencia
+            de datos se tiene una mejor expectativa salarial y observar si existe una
+            diferencia significativa entre cargos asociados 
+        '''),
+        html.H4(children = 'Promedios por años'),
+        dcc.Graph(
+            id = 'g11',
+            figure = graf11
+        ),
+        html.H4(children = 'Promedios por nivel de experiencia'),
+        dcc.Graph(
+            id = 'g12',
+            figure = graf12
+        ),
+        dcc.Graph(
+            id = 'g13',
+            figure = graf13
+        ),
+        dcc.Graph(
+            id = 'g14',
+            figure = graf14
+        ),
+        dcc.Graph(
+            id = 'g15',
+            figure = graf15
+        ),
+        #Sexto bloque de analisis
+        html.Div(children=[
+            html.H3(children = 'Análisis:'),
+            html.Div(children = '''
+                     Nicolás: 
+        '''),html.Div(children = '''
+                     Sofía: 
+        '''),html.Div(children = '''
+                     Victor: 
+        '''),
+        ]),
+        #Conclusiones finales
+        html.Div(children=[
+            html.H2(children = 'Conclusiones:'),
+            html.Div(children = '''
+                     Nicolás: 
+        '''),html.Div(children = '''
+                     Sofía: 
+        '''),html.Div(children = '''
+                     Victor: 
+        '''),
+        ]),
     ],
 )
 

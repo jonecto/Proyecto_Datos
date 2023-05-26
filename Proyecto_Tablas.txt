@@ -159,7 +159,7 @@ de datos se tiene una mejor expectativa salarial y observar si existe una
 diferencia significativa entre cargos asociados 
 */
 
--- top 5 empleos mas demandados. 
+-- top 5 empleos mas demandados.
 --Puede ser un grafico de barras
 
 SELECT nombre_trabajo, round(count(*),1) AS cantidad_empleos
@@ -229,10 +229,7 @@ from empleo
 group by tipo_empleo;
 
 --años y experiencia,lineas 
-select nivel_experiencia,
-       round(avg(case when anio = 2020 then salario_usd END), 1) AS salario_promedio_2020, 
-       round(avg(case when anio = 2021 THEN salario_usd END), 1) AS salario_promedio_2021,
-	   round(avg(case when anio = 2022 THEN salario_usd END), 1) AS salario_promedio_2022,
-	   round(avg(case when anio = 2023 THEN salario_usd end), 1) AS salario_promedio_2023
+select nivel_experiencia, anio,
+       round(avg(salario_usd), 1) salario_promedio 
 from empleo
-group by nivel_experiencia;
+group by nivel_experiencia, anio;
