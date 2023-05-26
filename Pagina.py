@@ -8,7 +8,7 @@ try:
         host = 'localhost',
         user = 'postgres',
         password = '123456789',
-        database = 'DataScientists'
+        database = 'aja'
     )
     print("Conexión exitosa")
     cursor = connection.cursor()
@@ -16,18 +16,7 @@ try:
     rows = cursor.fetchall()
     app = Dash(__name__)
     fig = px.bar(rows, x = 0, y = 1, pattern_shape = 1, pattern_shape_sequence = ['\\', '.', '+', '/', '.'], color_discrete_sequence = ["#34a0a4"], title = "productos por editorial")
-    app.layout = html.Div(children = [
-        html.H1(children = 'Gráfico Edición Cantidad'),
-        html.Div(children = '''
-            Dash: Aplicación para graficar fatos
-        '''),
-        dcc.Graph(
-            id = 'Example-Graph',
-            figure = fig
-        ),dcc.Input(id='input', placeholder='Escribe algo aqui!', type='text'),
-    html.Div(id='output')
-        
-         #ESCENARIO 1
+   #ESCENARIO 1
     cursor.execute("select  rank() over (order by avg(salario_usd) desc), empresa.id, pais, tamanio,round(avg(salario_usd),3) from (empresa inner join trabaja on empresa.id = trabaja.id_empresa) inner join empleo on empleo.id = trabaja.id_empleo group by empresa.id;")
     rows = cursor.fetchall()
     graf1 = px.histogram(rows, x = 4, pattern_shape = 1, pattern_shape_sequence = ['\\', '.', '+', '/', '.'], color_discrete_sequence = ["#34a0a4"], title = "Promedio de salario por empresa")
@@ -48,15 +37,48 @@ try:
     
     #ESCENARIO 2
     cursor.execute('''select nivel_experiencia, sum(salario_usd),count(*) 
-	from ((empresa inner join trabaja on empresa.id = trabaja.id_empresa)
-		inner join empleo on empleo.id = trabaja.id_empleo)
-		inner join empleado on empleado.id = trabaja.id_empleado
-	group by nivel_experiencia;''')
+    from ((empresa inner join trabaja on empresa.id = trabaja.id_empresa)
+        inner join empleo on empleo.id = trabaja.id_empleo)
+        inner join empleado on empleado.id = trabaja.id_empleado
+    group by nivel_experiencia;''')
     rows = cursor.fetchall()
     graf4 = px.histogram(rows, x = 0,y=2, pattern_shape = 1, pattern_shape_sequence = ['\\', '.', '+', '/', '.'], color_discrete_sequence = ["#34a0a4"], title = "Numero de empleos por nivel de experiencia")
     graf5 = px.histogram(rows, x = 0,y=1, pattern_shape = 1, pattern_shape_sequence = ['\\', '.', '+', '/', '.'], color_discrete_sequence = ["#34a0a4"], title = "Promedio de salario por nivel de experiencia")
 
-    
+    #ESCENARIO 3
+    cursor.execute('''select rank() over(order by round(avg(salario_usd),2) desc), nombre_trabajo, tipo_empleo, round(avg(salario_usd),2) 
+    from empleo inner join trabaja on empleo.id=trabaja.id_empleo
+    where nivel_experiencia='EN'
+    group by cube(nombre_trabajo, tipo_empleo);''')
+    rows = cursor.fetchall()
+    graf6 = px.histogram(rows, x = 1,y = 3 , pattern_shape = 1, pattern_shape_sequence = ['\\', '.', '+', '/', '.'], color_discrete_sequence = ["#34a0a4"], title = "Salario promedio por título de trabajo en nivel de entrada")
+    graf7 = px.histogram(rows, x = 2,y = 3, pattern_shape = 1, pattern_shape_sequence = ['\\', '.', '+', '/', '.'], color_discrete_sequence = ["#34a0a4"], title = "Cantidad de empleos por tipo en nivel de entrada")
+
+    #ESCENARIO 4
+    cursor.execute('''select promocion_remoto, count(*), round(avg(salario_usd),2)
+    from empleo
+    group by promocion_remoto;''')
+    rows = cursor.fetchall()
+    graf8 = px.histogram(rows, x = 0,y=2, pattern_shape = 1, pattern_shape_sequence = ['\\', '.', '+', '/', '.'], color_discrete_sequence = ["#34a0a4"], title = "Salario promedio por título de trabajo en nivel de entrada")
+    graf9 = px.histogram(rows, x = 0,y=1, pattern_shape = 1, pattern_shape_sequence = ['\\', '.', '+', '/', '.'], color_discrete_sequence = ["#34a0a4"], title = "Cantidad de tipo de empleo en nivel de entrada")
+
+    #ESCENARIO 5
+    cursor.execute('''select promocion_remoto, count(*), round(avg(salario_usd),2)
+    from empleo
+    group by promocion_remoto;''')
+    rows = cursor.fetchall()
+    graf8 = px.histogram(rows, x = 0,y=2, pattern_shape = 1, pattern_shape_sequence = ['\\', '.', '+', '/', '.'], color_discrete_sequence = ["#34a0a4"], title = "Salario promedio por título de trabajo en nivel de entrada")
+    graf9 = px.histogram(rows, x = 0,y=1, pattern_shape = 1, pattern_shape_sequence = ['\\', '.', '+', '/', '.'], color_discrete_sequence = ["#34a0a4"], title = "Cantidad de tipo de empleo en nivel de entrada")
+
+    #ESCENARIO 6
+    cursor.execute('''select promocion_remoto, count(*), round(avg(salario_usd),2)
+    from empleo
+    group by promocion_remoto;''')
+    rows = cursor.fetchall()
+    graf8 = px.histogram(rows, x = 0,y=2, pattern_shape = 1, pattern_shape_sequence = ['\\', '.', '+', '/', '.'], color_discrete_sequence = ["#34a0a4"], title = "Salario promedio por título de trabajo en nivel de entrada")
+    graf9 = px.histogram(rows, x = 0,y=1, pattern_shape = 1, pattern_shape_sequence = ['\\', '.', '+', '/', '.'], color_discrete_sequence = ["#34a0a4"], title = "Cantidad de tipo de empleo en nivel de entrada")
+
+
     app.layout = html.Div(children = [
         html.H1(children = 'Gráfico Edición Cantidad'),
         html.H3(children = 'ESCENARIO 1'),
@@ -94,15 +116,46 @@ try:
             figure = graf5
         ),
         
+        #Escenario 3 codigo
+        
+        html.H3(children = 'ESCENARIO 3'),
+        html.Div(children = '''
+           Identificar si existe una relación entre el nivel de experiencia, el nombre del empleo 
+           y los tipos de empleo obtenidos por los encuestados, enfocandose en los grupos que tienen menos 
+           experiencia, para darse una idea del panorama laboral de un recien egresado y cuales son los 
+           escenarios más favorables de entrada, como identificar en qué países se le paga mejor considerando 
+           el monto en dólares.
+        '''),
+        dcc.Graph(
+            id = 'g6',
+            figure = graf6
+        ),
+        dcc.Graph(
+            id = 'g7',
+            figure = graf7
+        ),
+        #Escenario 4 codigo
+        
+        html.H3(children = 'ESCENARIO 4'),
+        html.Div(children = '''
+           Analizar de que forma varian los salarios según la proporción de trabajo 
+           remoto que se tiene, con el objetivo de identificar que opción es mejor 
+           para el trabajador, teniendo en cuenta la cantidad de empleos remotos 
+           ofertados y la diferencia de ingresos. Todo esto tomando en cuenta 
+           después que los trabajos presenciales implican más costos de vida y 
+           limitaciones para los empleados.
+        '''),
+        dcc.Graph(
+            id = 'g8',
+            figure = graf8
+        ),
+        dcc.Graph(
+            id = 'g9',
+            figure = graf9
+        ),
     ],
-                     
 )
-    @app.callback(
-            Output(component_id='output', component_property='children'),
-            [Input(component_id='input', component_property='value')]
-    )
-    def update_value(input_data):
-            return 'Input: "{}"'.format(input_data)
+
     if __name__ == '__main__':
             app.run_server(debug = False)
 except Exception as ex:
