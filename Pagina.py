@@ -119,11 +119,11 @@ try:
         html.Div(children=[
             html.H3(children = 'Análisis:'),
             html.Div(children = '''
-                     Nicolás: 
+                     Nicolás: \n
         '''),html.Div(children = '''
-                     Sofía: 
+                     Sofía: \n
         '''),html.Div(children = '''
-                     Victor: 
+                     Victor: \n
         '''),
         ]),
     #Escenario 2 codigo
@@ -146,11 +146,11 @@ try:
         html.Div(children=[
             html.H3(children = 'Análisis:'),
             html.Div(children = '''
-                     Nicolás: 
+                     Nicolás: \n
         '''),html.Div(children = '''
-                     Sofía: 
+                     Sofía: \n
         '''),html.Div(children = '''
-                     Victor: 
+                     Victor: \n
         '''),
         ]),
     #Escenario 3 codigo
@@ -175,11 +175,11 @@ try:
         html.Div(children=[
             html.H3(children = 'Análisis:'),
             html.Div(children = '''
-                     Nicolás: 
+                     Nicolás: \n
         '''),html.Div(children = '''
-                     Sofía: 
+                     Sofía: \n
         '''),html.Div(children = '''
-                     Victor: 
+                     Victor: \n
         '''),
         ]),
     #Escenario 4 codigo
@@ -205,11 +205,11 @@ try:
         html.Div(children=[
             html.H3(children = 'Análisis:'),
             html.Div(children = '''
-                     Nicolás: 
+                     Nicolás: \n
         '''),html.Div(children = '''
-                     Sofía: 
+                     Sofía: \n
         '''),html.Div(children = '''
-                     Victor: 
+                     Victor: \n
         '''),
         ]),
     #Escenario 5 codigo
@@ -228,11 +228,11 @@ try:
         html.Div(children=[
             html.H3(children = 'Análisis:'),
             html.Div(children = '''
-                     Nicolás: 
+                     Nicolás: \n
         '''),html.Div(children = '''
-                     Sofía: 
+                     Sofía: \n
         '''),html.Div(children = '''
-                     Victor: 
+                     Victor: \n
         '''),
         ]),
         
@@ -270,22 +270,22 @@ try:
         html.Div(children=[
             html.H3(children = 'Análisis:'),
             html.Div(children = '''
-                     Nicolás: 
+                     Nicolás: \n
         '''),html.Div(children = '''
-                     Sofía: 
+                     Sofía: \n
         '''),html.Div(children = '''
-                     Victor: 
+                     Victor: \n
         '''),
         ]),
         #Conclusiones finales
         html.Div(children=[
             html.H2(children = 'Conclusiones:'),
             html.Div(children = '''
-                     Nicolás: 
+                     Nicolás: \n
         '''),html.Div(children = '''
-                     Sofía: 
+                     Sofía: \n
         '''),html.Div(children = '''
-                     Victor: 
+                     Victor: \n
         '''),
         ]),
     ],
