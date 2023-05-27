@@ -15,7 +15,7 @@ try:
     cursor.execute("select promocion_remoto, count(*), round(avg(salario_usd),2) from empleo group by promocion_remoto")
     rows = cursor.fetchall()
     app = Dash(__name__)
-    fig = px.bar(rows, x = 0, y = 1, pattern_shape = 1, pattern_shape_sequence = ['\\', '.', '+', '/', '.'], color_discrete_sequence = ["#34a0a4"], title = "productos por editorial")
+    fig = px.bar(rows, x = 0, y = 1, pattern_shape = 1, pattern_shape_sequence = ['\\', '.', '+', '/', '.'], color_discrete_sequence = ["#34a0a4"], title = "numero de datos por proporcion de trabajo remoto")
    
    #ESCENARIO 1
     cursor.execute("select  rank() over (order by avg(salario_usd) desc), empresa.id, pais, tamanio,round(avg(salario_usd),3) from (empresa inner join trabaja on empresa.id = trabaja.id_empresa) inner join empleo on empleo.id = trabaja.id_empleo group by empresa.id;")
@@ -52,8 +52,8 @@ try:
     where nivel_experiencia='EN'
     group by cube(nombre_trabajo, tipo_empleo);''')
     rows = cursor.fetchall()
-    graf6 = px.histogram(rows, x = 1,y = 3 , pattern_shape = 1, pattern_shape_sequence = ['\\', '.', '+', '/', '.'], color_discrete_sequence = ["#34a0a4"], title = "Salario promedio por título de trabajo para junior")
-    graf7 = px.histogram(rows, x = 2,y = 3, pattern_shape = 1, pattern_shape_sequence = ['\\', '.', '+', '/', '.'], color_discrete_sequence = ["#34a0a4"], title = "Cantidad de empleos por tipo en capacitación junior")
+    graf6 = px.histogram(rows, x = 1,y = 3 , pattern_shape = 1, pattern_shape_sequence = ['\\', '.', '+', '/', '.'], color_discrete_sequence = ["#34a0a4"], title = "Salario promedio por título de trabajo para Entry")
+    graf7 = px.histogram(rows, x = 2,y = 3, pattern_shape = 1, pattern_shape_sequence = ['\\', '.', '+', '/', '.'], color_discrete_sequence = ["#34a0a4"], title = "Cantidad de empleos por tipo en capacitación Entry")
 
     #ESCENARIO 4
     cursor.execute('''select promocion_remoto, count(*), round(avg(salario_usd),2)
@@ -326,12 +326,12 @@ try:
             de datos se tiene una mejor expectativa salarial y observar si existe una
             diferencia significativa entre cargos asociados 
         '''),
-        html.H4(children = 'Promedios por años'),
+        html.H4(children = 'Promedios por nivel de experiencia'),
         dcc.Graph(
             id = 'g13',
             figure = graf13
         ),
-        html.H4(children = 'Promedios por nivel de experiencia'),
+        html.H4(children = 'Promedios por tipo de empleo'),
         dcc.Graph(
             id = 'g14',
             figure = graf14
