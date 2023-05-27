@@ -263,7 +263,9 @@ try:
             html.Div(children = '''
                      Nicolás: Se puede observar que la mayoría de empleos se distribuyen 
                      en la virtualidad total o la presencialidad total, y su oferta de trabajo 
-                     generalmente es muy cercana (ambas están alrededor de los 1200 empleos ofertados). 
+                     generalmente es muy cercana (ambas están alrededor de los 1200 empleos ofertados). Además de esto 
+                     se puede observar una clara diferencia con las personas que tienen emoleos mixtos, puesto que
+                     sus salarios son bastante bajos y no hay mucha oferta en estos tipos de empleo.
         '''),' ',html.Div(children = '''
                      Sofía: 
         '''),' ',html.Div(children = '''
@@ -301,7 +303,10 @@ try:
                      Se puede evidenciar dentro de las gráficas 
                      que los empleos más demandados generalmente 
                      aquellos que requieren mucha más preparación, como lo es
-                     el ingeniero de Machine Learning, o el Ingeniero de Datos.
+                     el ingeniero de Machine Learning, o el Ingeniero de Datos. Adicional a esto 
+                     se puede observar que los empleos mejor remunerados son aquellos 
+                     que implican alguna clase de liderazgo, sea anejo de proyectos como el 
+                     cientifico de datos principal o lider de areas como el lider de analistas de datos.
         '''),' ',html.Div(children = '''
                      Sofía: 
         '''),' ',html.Div(children = '''
@@ -344,9 +349,10 @@ try:
                      Nicolás: Como es de esperarse, se puede observar un aumento en 
                      el salario promedio para cada uno de los 
                      niveles de experiencia, especialmente en el salario de los
-                     senior. Se puede ver también un poco
-                     los efectos de la pandemia, dado que los años antes de la reactivación
-                     fueron bastante fluctuantes. 
+                     senior. Con respecto a los tipos de empleo se puede decir que 
+                     en general no hay mucha relación con los años, dada la fluctuación
+                     grande entre fechas y la poca relación con eventos globales como 
+                     la pandemia.
         '''),' ',html.Div(children = '''
                      Sofía: 
         '''),' ',html.Div(children = '''
@@ -363,12 +369,12 @@ try:
             html.H2(children = 'Conclusiones:'),
             html.Div(children = '''
                      Nicolás: Teniendo en cuenta los datos, se puede 
-                     concluir que los salarios de Cientificos de Datos 
-                     son bastante buenos, y tienen bastante facilidad tanto 
-                     para alguien que puede estar presencialmente como alguien que 
-                     no tiene tanta facilidad de movilizarse. Es un sector muy versatil al 
-                     momento de entrar, pues los empleos que se ofertan con nivel de entrada son 
-                     variados y bastante bien pagados. 
+                     concluir que los salarios de Cientificos de Datos son bastante promedio a
+                     comparación de los salarios de otras carreras. Se puede notar también que existe una 
+                     relación directa clara entre los salarios y el nivel de preparación laboral, siendo los cargos
+                     ejecutivos los mejor remunerados. Adicional a esto, se puede evidenciar una gran 
+                     facilidad de ingreso en este campo laboral, puesto que se ofertan bastantes empleos con salarios
+                     bastante generosos para ser de un nivel de entrada. 
         '''),html.Div(children = '''
                      Sofía: 
         '''),html.Div(children = '''
