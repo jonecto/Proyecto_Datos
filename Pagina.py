@@ -63,37 +63,7 @@ try:
     graf8=fig = px.pie(rows, values=2, names=0, title='Population of European continent')
     graf9 = px.histogram(rows, x = 0,y=1, pattern_shape = 1, pattern_shape_sequence = ['\\', '.', '+', '/', '.'], color_discrete_sequence = ["#34a0a4"], title = "Cantidad de empleos por modalidad en nivel de entrada")
 
-    #ESCENARIO 5
-    cursor.execute('''SELECT nombre_trabajo, round(count(*),1) AS cantidad_empleos
-    FROM empleo
-    GROUP BY nombre_trabajo
-    ORDER BY cantidad_empleos DESC
-    LIMIT 5;''')
-    rows = cursor.fetchall()
-    graf10 = px.histogram(rows, x = 0,y=1, pattern_shape = 1, pattern_shape_sequence = ['\\', '.', '+', '/', '.'], color_discrete_sequence = ["#34a0a4"], title = "top 5 empleos mas demandados.")
     
-    #ESCENARIO 6
-    cursor.execute('''select nivel_experiencia, anio,
-        round(avg(salario_usd), 1) salario_promedio 
-        from empleo
-        group by nivel_experiencia, anio
-        order by nivel_experiencia;''')
-    rows = cursor.fetchall()
-    graf11 = px.line(rows, x = 0,y=2, color=1)
-    
-    cursor.execute('''select tipo_empleo,
-       round(avg(CASE WHEN nivel_experiencia = 'SE' THEN salario_usd END), 1) AS Salario_senior, 
-       round(avg(CASE WHEN nivel_experiencia = 'MI' THEN salario_usd END), 1) AS Salario_mid,
-	   round(avg(CASE WHEN nivel_experiencia = 'EN' THEN salario_usd END), 1) AS Salario_junior,
-	   round(avg(CASE WHEN nivel_experiencia = 'EX' THEN salario_usd END), 1) AS salario_ejecutivo
-        from empleo
-        group by tipo_empleo;''')
-    rows = cursor.fetchall()
-    print(rows)
-    graf12 = px.bar(rows, x = 0,y=1, pattern_shape = 1, pattern_shape_sequence = ['\\', '.', '+', '/', '.'], color_discrete_sequence = ["#34a0a4"], title = "Promedio de salario por tipo de empleo para Senior")
-    graf13 = px.bar(rows, x = 0,y=2, pattern_shape = 1, pattern_shape_sequence = ['\\', '.', '+', '/', '.'], color_discrete_sequence = ["#34a0a4"], title = "Promedio de salario por tipo de empleo para Mid")
-    graf14 = px.bar(rows, x = 0,y=3, pattern_shape = 1, pattern_shape_sequence = ['\\', '.', '+', '/', '.'], color_discrete_sequence = ["#34a0a4"], title = "Promedio de salario por tipo de empleo para junior")
-    graf15 = px.bar(rows, x = 0,y=4, pattern_shape = 1, pattern_shape_sequence = ['\\', '.', '+', '/', '.'], color_discrete_sequence = ["#34a0a4"], title = "Promedio de salario por tipo de empleo para executive")
 
 
     app.layout = html.Div(children = [
@@ -119,11 +89,18 @@ try:
         html.Div(children=[
             html.H3(children = 'Análisis:'),
             html.Div(children = '''
-                     Nicolás: \n
-        '''),html.Div(children = '''
-                     Sofía: \n
-        '''),html.Div(children = '''
-                     Victor: \n
+                     Nicolás: 
+                     Como se puede observar en las gráficas, la mayoría de las empresas
+                     están en salarios de entre 10.000 y 200.000 dólares,
+                     con muy pocas pagando más de 100.000 a sus empleados.
+                     Esto muestra que el panorama laboral no es muy favorable,
+                     dado que por més se ganaría alrededor de 800 dólares.
+                     Sin embargo, es muy probable que estos datos vengan de freelancers por 
+                     lo que se puede ver en gráficas posteriores.
+        '''),' ',html.Div(children = '''
+                     Sofía: 
+        '''),' ',html.Div(children = '''
+                     Victor: 
         '''),
         ]),
     #Escenario 2 codigo
@@ -146,11 +123,17 @@ try:
         html.Div(children=[
             html.H3(children = 'Análisis:'),
             html.Div(children = '''
-                     Nicolás: \n
+                     Nicolás: Se puede observar que 
+                     los empleos de nivel ejecutivo, si bien son 
+                     mejor remunerados, son muy poco frecuentes de encontrar
+                     en este medio, al igual que los empleos de entrada. 
+                     Pese a ser más, los niveles de entrada tienen prácticaente la 
+                     misma inversión de los ejecutivos, lo que significa que 
+                     son menos remunerados.
         '''),html.Div(children = '''
-                     Sofía: \n
+                     Sofía: 
         '''),html.Div(children = '''
-                     Victor: \n
+                     Victor: 
         '''),
         ]),
     #Escenario 3 codigo
@@ -175,11 +158,14 @@ try:
         html.Div(children=[
             html.H3(children = 'Análisis:'),
             html.Div(children = '''
-                     Nicolás: \n
+                     Nicolás: Para los empleos de nivel de entrada, se puede observar que no son tan mal
+                     pagados, llegando máximo a los 340.000 dólares. Se puede observar una relación entre
+                     el nombre del trabajo y su complejidad con la remuneración, dado que los empleos mejor pagados
+                     son aquellos que requieren mayor preparación.
         '''),html.Div(children = '''
-                     Sofía: \n
-        '''),html.Div(children = '''
-                     Victor: \n
+                     Sofía: 
+        '''),' ',html.Div(children = '''
+                     Victor:
         '''),
         ]),
     #Escenario 4 codigo
@@ -193,6 +179,7 @@ try:
            después que los trabajos presenciales implican más costos de vida y 
            limitaciones para los empleados.
         '''),
+        html.H4(children='IMPORTANTE: para la visualización de los datos, el valor -50 en las gráficas representa quellos empleos que no tienen un componente de trabajo remoto.'),
         dcc.Graph(
             id = 'g8',
             figure = graf8
@@ -205,89 +192,16 @@ try:
         html.Div(children=[
             html.H3(children = 'Análisis:'),
             html.Div(children = '''
-                     Nicolás: \n
-        '''),html.Div(children = '''
-                     Sofía: \n
-        '''),html.Div(children = '''
-                     Victor: \n
+                     Nicolás: Se puede observar que la mayoría de empleos se distribuyen 
+                     en la virtualidad total o la presencialidad total, y su oferta de trabajo 
+                     generalmente es muy cercana (ambas están alrededor de los 1200 empleos ofertados). 
+        '''),' ',html.Div(children = '''
+                     Sofía: 
+        '''),' ',html.Div(children = '''
+                     Victor: 
         '''),
         ]),
-    #Escenario 5 codigo
-        
-        html.H3(children = 'ESCENARIO 5'),
-        html.Div(children = '''
-           Identificar mediante el nombre de los cargos en cuales sectores de la ciencia
-            de datos se tiene una mejor expectativa salarial y observar si existe una
-            diferencia significativa entre cargos asociados 
-        '''),
-        dcc.Graph(
-            id = 'g10',
-            figure = graf10
-        ),
-        #Quinto bloque de analisis
-        html.Div(children=[
-            html.H3(children = 'Análisis:'),
-            html.Div(children = '''
-                     Nicolás: \n
-        '''),html.Div(children = '''
-                     Sofía: \n
-        '''),html.Div(children = '''
-                     Victor: \n
-        '''),
-        ]),
-        
-    #Escenario 6 codigo
-        
-        html.H3(children = 'ESCENARIO 6'),
-        html.Div(children = '''
-           Identificar mediante el nombre de los cargos en cuales sectores de la ciencia
-            de datos se tiene una mejor expectativa salarial y observar si existe una
-            diferencia significativa entre cargos asociados 
-        '''),
-        html.H4(children = 'Promedios por años'),
-        dcc.Graph(
-            id = 'g11',
-            figure = graf11
-        ),
-        html.H4(children = 'Promedios por nivel de experiencia'),
-        dcc.Graph(
-            id = 'g12',
-            figure = graf12
-        ),
-        dcc.Graph(
-            id = 'g13',
-            figure = graf13
-        ),
-        dcc.Graph(
-            id = 'g14',
-            figure = graf14
-        ),
-        dcc.Graph(
-            id = 'g15',
-            figure = graf15
-        ),
-        #Sexto bloque de analisis
-        html.Div(children=[
-            html.H3(children = 'Análisis:'),
-            html.Div(children = '''
-                     Nicolás: \n
-        '''),html.Div(children = '''
-                     Sofía: \n
-        '''),html.Div(children = '''
-                     Victor: \n
-        '''),
-        ]),
-        #Conclusiones finales
-        html.Div(children=[
-            html.H2(children = 'Conclusiones:'),
-            html.Div(children = '''
-                     Nicolás: \n
-        '''),html.Div(children = '''
-                     Sofía: \n
-        '''),html.Div(children = '''
-                     Victor: \n
-        '''),
-        ]),
+    
     ],
 )
 

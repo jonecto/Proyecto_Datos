@@ -233,3 +233,17 @@ select nivel_experiencia, anio,
        round(avg(salario_usd), 1) salario_promedio 
 from empleo
 group by nivel_experiencia, anio;
+
+-- promedio salarios de las tres profesiones màs importantes
+--Puede ser un gráfico de barras
+Select 'Ingeiero de datos' as Nombre_trabajo, ROUND(AVG(salario_usd), 1) AS Salario_promedio
+from empleo
+where nombre_trabajo LIKE '%Data Engineer%'
+union
+select 'Cientifico de datos' AS Nombre_trabajo, ROUND(AVG(salario_usd), 1) AS Salario_promedio
+from empleo
+where nombre_trabajo LIKE '%Data Scientist%'
+union
+select 'Analista de datos' AS Nombre_trabajo, ROUND(AVG(salario_usd), 1) AS Salario_promedio
+from empleo
+where nombre_trabajo LIKE '%Analyst%';
