@@ -397,7 +397,7 @@ la pandemia.
                      carga de datos masiva, etc) y la creación de gráficas y una página web me pareció 
                      interesante y siento que enriqueció mis conocimientos.
         '''),html.Div(children = '''
-                     Sofía:•Las expectativas salariales según empresa rondan el intervalo de 10.00 a 200.000 dólares y no
+                     Sofía:Las expectativas salariales según empresa rondan el intervalo de 10.00 a 200.000 dólares y no
 		     suelen superar los 100.000, lo cual como expectativa mensual es algo bajo. Por otra parte, las mejores 
 		     empresas para trabajar son las medianas de los países Israel, Puerto Rico y Estados Unidos. 
 	'''),html.Div(children = '''
