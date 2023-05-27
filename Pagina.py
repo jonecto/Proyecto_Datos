@@ -60,8 +60,8 @@ try:
     from empleo
     group by promocion_remoto;''')
     rows = cursor.fetchall()
-    graf8=fig = px.pie(rows, values=2, names=0, title='Population of European continent')
-    graf9 = px.histogram(rows, x = 0,y=1, pattern_shape = 1, pattern_shape_sequence = ['\\', '.', '+', '/', '.'], color_discrete_sequence = ["#34a0a4"], title = "Cantidad de empleos por modalidad en nivel de entrada")
+    graf8=fig = px.bar(rows, x = 0,y=2, pattern_shape = 1, pattern_shape_sequence = ['\\', '.', '+', '/', '.'], color_discrete_sequence = ["#34a0a4"], title = "Promedio de salario por modalidad en nivel de entrada")
+    graf9 = px.pie(rows, values=1, names=0, title='Cantidad de empleos por modalidad en nivel de entrada')
 
     #ESCENARIO 5
     cursor.execute('''SELECT nombre_trabajo, round(count(*),1) AS cantidad_empleos
@@ -70,7 +70,16 @@ try:
     ORDER BY cantidad_empleos DESC
     LIMIT 5;''')
     rows = cursor.fetchall()
-    graf10 = px.histogram(rows, x = 0,y=1, pattern_shape = 1, pattern_shape_sequence = ['\\', '.', '+', '/', '.'], color_discrete_sequence = ["#34a0a4"], title = "top 5 empleos mas demandados.")
+    graf10 = px.histogram(rows, x = 0,y=1, pattern_shape = 1, pattern_shape_sequence = ['\\', '.', '+', '/', '.'], color_discrete_sequence = ["#34a0a4"], title = "top 5 empleos mas demandados (Cantidad).")
+
+    cursor.execute('''SELECT nombre_trabajo, round(avg(salario_usd),1) AS cantidad_empleos
+    FROM empleo
+    GROUP BY nombre_trabajo
+    ORDER BY cantidad_empleos DESC
+    LIMIT 5;''')
+    rows = cursor.fetchall()
+    graf11 = px.histogram(rows, x = 0,y=1, pattern_shape = 1, pattern_shape_sequence = ['\\', '.', '+', '/', '.'], color_discrete_sequence = ["#34a0a4"], title = "top 5 empleos con mejor promedio de salario.")
+
 
     cursor.execute('''Select 'Ingeiero de datos' as Nombre_trabajo, ROUND(AVG(salario_usd), 1) AS Salario_promedio
     from empleo
@@ -84,7 +93,7 @@ try:
     from empleo
     where nombre_trabajo LIKE '%Analyst%';''')
     rows = cursor.fetchall()
-    graf11 = px.histogram(rows, x = 0,y=1, pattern_shape = 1, pattern_shape_sequence = ['\\', '.', '+', '/', '.'], color_discrete_sequence = ["#34a0a4"], title = "promedio salarios de las tres profesiones màs importantes")
+    graf12 = px.histogram(rows, x = 0,y=1, pattern_shape = 1, pattern_shape_sequence = ['\\', '.', '+', '/', '.'], color_discrete_sequence = ["#34a0a4"], title = "promedio salarios de las tres profesiones màs importantes")
 
     #ESCENARIO 6
     cursor.execute('''select nivel_experiencia, anio,
@@ -93,21 +102,17 @@ try:
         group by nivel_experiencia, anio
         order by nivel_experiencia;''')
     rows = cursor.fetchall()
-    graf12 = px.line(rows, x = 0,y=2, color=1)
+    graf13 = px.line(rows, x = 0,y=2, color=1)
     
-    cursor.execute('''select tipo_empleo,
-       round(avg(CASE WHEN nivel_experiencia = 'SE' THEN salario_usd END), 1) AS Salario_senior, 
-       round(avg(CASE WHEN nivel_experiencia = 'MI' THEN salario_usd END), 1) AS Salario_mid,
-	   round(avg(CASE WHEN nivel_experiencia = 'EN' THEN salario_usd END), 1) AS Salario_junior,
-	   round(avg(CASE WHEN nivel_experiencia = 'EX' THEN salario_usd END), 1) AS salario_ejecutivo
-        from empleo
-        group by tipo_empleo;''')
+    cursor.execute('''select anio, tipo_empleo,
+    round(avg(salario_usd), 1) AS Salario_promedio
+    from empleo
+    group by anio, tipo_empleo
+    order by anio, tipo_empleo;''')
     rows = cursor.fetchall()
     print(rows)
-    graf13 = px.bar(rows, x = 0,y=1, pattern_shape = 1, pattern_shape_sequence = ['\\', '.', '+', '/', '.'], color_discrete_sequence = ["#34a0a4"], title = "Promedio de salario por tipo de empleo para Senior")
-    graf14 = px.bar(rows, x = 0,y=2, pattern_shape = 1, pattern_shape_sequence = ['\\', '.', '+', '/', '.'], color_discrete_sequence = ["#34a0a4"], title = "Promedio de salario por tipo de empleo para Mid")
-    graf15 = px.bar(rows, x = 0,y=3, pattern_shape = 1, pattern_shape_sequence = ['\\', '.', '+', '/', '.'], color_discrete_sequence = ["#34a0a4"], title = "Promedio de salario por tipo de empleo para junior")
-    graf16 = px.bar(rows, x = 0,y=4, pattern_shape = 1, pattern_shape_sequence = ['\\', '.', '+', '/', '.'], color_discrete_sequence = ["#34a0a4"], title = "Promedio de salario por tipo de empleo para executive")
+    graf14 = px.line(rows, x = 1,y=2, color=0)
+    
 
 
     app.layout = html.Div(children = [
@@ -261,6 +266,10 @@ try:
             id = 'g11',
             figure = graf11
         ),
+        dcc.Graph(
+            id = 'g12',
+            figure = graf12
+        ),
         #Quinto bloque de analisis
         html.Div(children=[
             html.H3(children = 'Análisis:'),
@@ -287,25 +296,13 @@ try:
         '''),
         html.H4(children = 'Promedios por años'),
         dcc.Graph(
-            id = 'g12',
-            figure = graf12
-        ),
-        html.H4(children = 'Promedios por nivel de experiencia'),
-        dcc.Graph(
             id = 'g13',
             figure = graf13
         ),
+        html.H4(children = 'Promedios por nivel de experiencia'),
         dcc.Graph(
             id = 'g14',
             figure = graf14
-        ),
-        dcc.Graph(
-            id = 'g15',
-            figure = graf15
-        ),
-        dcc.Graph(
-            id = 'g16',
-            figure = graf16
         ),
         
         #Sexto bloque de analisis
