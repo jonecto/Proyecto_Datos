@@ -63,7 +63,51 @@ try:
     graf8=fig = px.pie(rows, values=2, names=0, title='Population of European continent')
     graf9 = px.histogram(rows, x = 0,y=1, pattern_shape = 1, pattern_shape_sequence = ['\\', '.', '+', '/', '.'], color_discrete_sequence = ["#34a0a4"], title = "Cantidad de empleos por modalidad en nivel de entrada")
 
+    #ESCENARIO 5
+    cursor.execute('''SELECT nombre_trabajo, round(count(*),1) AS cantidad_empleos
+    FROM empleo
+    GROUP BY nombre_trabajo
+    ORDER BY cantidad_empleos DESC
+    LIMIT 5;''')
+    rows = cursor.fetchall()
+    graf10 = px.histogram(rows, x = 0,y=1, pattern_shape = 1, pattern_shape_sequence = ['\\', '.', '+', '/', '.'], color_discrete_sequence = ["#34a0a4"], title = "top 5 empleos mas demandados.")
+
+    cursor.execute('''Select 'Ingeiero de datos' as Nombre_trabajo, ROUND(AVG(salario_usd), 1) AS Salario_promedio
+    from empleo
+    where nombre_trabajo LIKE '%Data Engineer%'
+    union
+    select 'Cientifico de datos' AS Nombre_trabajo, ROUND(AVG(salario_usd), 1) AS Salario_promedio
+    from empleo
+    where nombre_trabajo LIKE '%Data Scientist%'
+    union
+    select 'Analista de datos' AS Nombre_trabajo, ROUND(AVG(salario_usd), 1) AS Salario_promedio
+    from empleo
+    where nombre_trabajo LIKE '%Analyst%';''')
+    rows = cursor.fetchall()
+    graf11 = px.histogram(rows, x = 0,y=1, pattern_shape = 1, pattern_shape_sequence = ['\\', '.', '+', '/', '.'], color_discrete_sequence = ["#34a0a4"], title = "promedio salarios de las tres profesiones màs importantes")
+
+    #ESCENARIO 6
+    cursor.execute('''select nivel_experiencia, anio,
+        round(avg(salario_usd), 1) salario_promedio 
+        from empleo
+        group by nivel_experiencia, anio
+        order by nivel_experiencia;''')
+    rows = cursor.fetchall()
+    graf12 = px.line(rows, x = 0,y=2, color=1)
     
+    cursor.execute('''select tipo_empleo,
+       round(avg(CASE WHEN nivel_experiencia = 'SE' THEN salario_usd END), 1) AS Salario_senior, 
+       round(avg(CASE WHEN nivel_experiencia = 'MI' THEN salario_usd END), 1) AS Salario_mid,
+	   round(avg(CASE WHEN nivel_experiencia = 'EN' THEN salario_usd END), 1) AS Salario_junior,
+	   round(avg(CASE WHEN nivel_experiencia = 'EX' THEN salario_usd END), 1) AS salario_ejecutivo
+        from empleo
+        group by tipo_empleo;''')
+    rows = cursor.fetchall()
+    print(rows)
+    graf13 = px.bar(rows, x = 0,y=1, pattern_shape = 1, pattern_shape_sequence = ['\\', '.', '+', '/', '.'], color_discrete_sequence = ["#34a0a4"], title = "Promedio de salario por tipo de empleo para Senior")
+    graf14 = px.bar(rows, x = 0,y=2, pattern_shape = 1, pattern_shape_sequence = ['\\', '.', '+', '/', '.'], color_discrete_sequence = ["#34a0a4"], title = "Promedio de salario por tipo de empleo para Mid")
+    graf15 = px.bar(rows, x = 0,y=3, pattern_shape = 1, pattern_shape_sequence = ['\\', '.', '+', '/', '.'], color_discrete_sequence = ["#34a0a4"], title = "Promedio de salario por tipo de empleo para junior")
+    graf16 = px.bar(rows, x = 0,y=4, pattern_shape = 1, pattern_shape_sequence = ['\\', '.', '+', '/', '.'], color_discrete_sequence = ["#34a0a4"], title = "Promedio de salario por tipo de empleo para executive")
 
 
     app.layout = html.Div(children = [
@@ -201,7 +245,103 @@ try:
                      Victor: 
         '''),
         ]),
-    
+    #Escenario 5 codigo
+        
+        html.H3(children = 'ESCENARIO 5'),
+        html.Div(children = '''
+           Identificar mediante el nombre de los cargos en cuales sectores de la ciencia
+            de datos se tiene una mejor expectativa salarial y observar si existe una
+            diferencia significativa entre cargos asociados 
+        '''),
+        dcc.Graph(
+            id = 'g10',
+            figure = graf10
+        ),
+        dcc.Graph(
+            id = 'g11',
+            figure = graf11
+        ),
+        #Quinto bloque de analisis
+        html.Div(children=[
+            html.H3(children = 'Análisis:'),
+            html.Div(children = '''
+                     Nicolás: 
+                     Se puede evidenciar dentro de las gráficas 
+                     que los empleos más demandados generalmente 
+                     aquellos que requieren mucha más preparación, como lo es
+                     el ingeniero de Machine Learning, o el Ingeniero de Datos.
+        '''),' ',html.Div(children = '''
+                     Sofía: 
+        '''),' ',html.Div(children = '''
+                     Victor: 
+        '''),
+        ]),
+        
+    #Escenario 6 codigo
+        
+        html.H3(children = 'ESCENARIO 6'),
+        html.Div(children = '''
+           Identificar mediante el nombre de los cargos en cuales sectores de la ciencia
+            de datos se tiene una mejor expectativa salarial y observar si existe una
+            diferencia significativa entre cargos asociados 
+        '''),
+        html.H4(children = 'Promedios por años'),
+        dcc.Graph(
+            id = 'g12',
+            figure = graf12
+        ),
+        html.H4(children = 'Promedios por nivel de experiencia'),
+        dcc.Graph(
+            id = 'g13',
+            figure = graf13
+        ),
+        dcc.Graph(
+            id = 'g14',
+            figure = graf14
+        ),
+        dcc.Graph(
+            id = 'g15',
+            figure = graf15
+        ),
+        dcc.Graph(
+            id = 'g16',
+            figure = graf16
+        ),
+        
+        #Sexto bloque de analisis
+        html.Div(children=[
+            html.H3(children = 'Análisis:'),
+            html.Div(children = '''
+                     Nicolás: Como es de esperarse, se puede observar un aumento en 
+                     el salario promedio para cada uno de los 
+                     niveles de experiencia, especialmente en el salario de los
+                     senior. Se puede ver también un poco
+                     los efectos de la pandemia, dado que los años antes de la reactivación
+                     fueron bastante fluctuantes. 
+        '''),' ',html.Div(children = '''
+                     Sofía: 
+        '''),' ',html.Div(children = '''
+                     Victor: 
+        '''),
+        ]),
+        
+        #Conclusiones finales
+        html.Div(children=[
+            html.H2(children = 'Conclusiones:'),
+            html.Div(children = '''
+                     Nicolás: Teniendo en cuenta los datos, se puede 
+                     concluir que los salarios de Cientificos de Datos 
+                     son bastante buenos, y tienen bastante facilidad tanto 
+                     para alguien que puede estar presencialmente como alguien que 
+                     no tiene tanta facilidad de movilizarse. Es un sector muy versatil al 
+                     momento de entrar, pues los empleos que se ofertan con nivel de entrada son 
+                     variados y bastante bien pagados. 
+        '''),html.Div(children = '''
+                     Sofía: 
+        '''),html.Div(children = '''
+                     Victor: 
+        '''),
+        ]),
     ],
 )
 
