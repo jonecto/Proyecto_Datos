@@ -261,11 +261,11 @@ try:
         html.Div(children=[
             html.H3(children = 'Análisis:'),
             html.Div(children = '''
-                     Nicolás: Se puede observar que la mayoría de empleos se distribuyen 
-                     en la virtualidad total o la presencialidad total, y su oferta de trabajo 
-                     generalmente es muy cercana (ambas están alrededor de los 1200 empleos ofertados). Además de esto 
-                     se puede observar una clara diferencia con las personas que tienen emoleos mixtos, puesto que
-                     sus salarios son bastante bajos y no hay mucha oferta en estos tipos de empleo.
+Nicolás: Se puede observar que la mayoría de empleos se distribuyen 
+en la virtualidad total o la presencialidad total, y su oferta de trabajo 
+generalmente es muy cercana (ambas están alrededor de los 1200 empleos ofertados). Además de esto 
+se puede observar una clara diferencia con las personas que tienen emoleos mixtos, puesto que
+sus salarios son bastante bajos y no hay mucha oferta en estos tipos de empleo.
         '''),' ',html.Div(children = '''
                      Sofía: 
         '''),' ',html.Div(children = '''
@@ -300,13 +300,13 @@ try:
             html.H3(children = 'Análisis:'),
             html.Div(children = '''
                      Nicolás: 
-                     Se puede evidenciar dentro de las gráficas 
-                     que los empleos más demandados generalmente 
-                     aquellos que requieren mucha más preparación, como lo es
-                     el ingeniero de Machine Learning, o el Ingeniero de Datos. Adicional a esto 
-                     se puede observar que los empleos mejor remunerados son aquellos 
-                     que implican alguna clase de liderazgo, sea anejo de proyectos como el 
-                     cientifico de datos principal o lider de areas como el lider de analistas de datos.
+Se puede evidenciar dentro de las gráficas 
+que los empleos más demandados generalmente 
+aquellos que requieren mucha más preparación, como lo es
+el ingeniero de Machine Learning, o el Ingeniero de Datos. Adicional a esto 
+se puede observar que los empleos mejor remunerados son aquellos 
+que implican alguna clase de liderazgo, sea anejo de proyectos como el 
+cientifico de datos principal o lider de areas como el lider de analistas de datos.
         '''),' ',html.Div(children = '''
                      Sofía: 
         '''),' ',html.Div(children = '''
@@ -346,13 +346,13 @@ try:
         html.Div(children=[
             html.H3(children = 'Análisis:'),
             html.Div(children = '''
-                     Nicolás: Como es de esperarse, se puede observar un aumento en 
-                     el salario promedio para cada uno de los 
-                     niveles de experiencia, especialmente en el salario de los
-                     senior. Con respecto a los tipos de empleo se puede decir que 
-                     en general no hay mucha relación con los años, dada la fluctuación
-                     grande entre fechas y la poca relación con eventos globales como 
-                     la pandemia.
+Nicolás: Como es de esperarse, se puede observar un aumento en 
+el salario promedio para cada uno de los 
+niveles de experiencia, especialmente en el salario de los
+senior. Con respecto a los tipos de empleo se puede decir que 
+en general no hay mucha relación con los años, dada la fluctuación
+grande entre fechas y la poca relación con eventos globales como 
+la pandemia.
         '''),' ',html.Div(children = '''
                      Sofía: 
         '''),' ',html.Div(children = '''
@@ -374,7 +374,10 @@ try:
                      relación directa clara entre los salarios y el nivel de preparación laboral, siendo los cargos
                      ejecutivos los mejor remunerados. Adicional a esto, se puede evidenciar una gran 
                      facilidad de ingreso en este campo laboral, puesto que se ofertan bastantes empleos con salarios
-                     bastante generosos para ser de un nivel de entrada. 
+                     bastante generosos para ser de un nivel de entrada. Con respecto al proyecto sentí que fue un buen 
+                     ejercicio de análisis, el proceso de tratamiento de una base de datos (normalización de la base de datos, 
+                     carga de datos masiva, etc) y la creación de gráficas y una página web me pareció 
+                     interesante y siento que enriqueció mis conocimientos.
         '''),html.Div(children = '''
                      Sofía: 
         '''),html.Div(children = '''
