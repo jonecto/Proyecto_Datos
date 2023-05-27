@@ -149,7 +149,12 @@ try:
         '''),' ',html.Div(children = '''
                      Sofía: 
         '''),' ',html.Div(children = '''
-                     Victor: 
+                     Victor: A la luz de la primera gráfica se puede asegurar que el lugar donde se 
+                     sitúan las empresas sí influye en los salarios pagados a los trabajadores de la
+                     industria de la ciencia de datos. El hecho de que no sea una distribución 
+                     uniforme muestra que en países con industrias de software más desarrolladas pagan
+                     mejor. Paises como Israel, Canada o EE.UU.
+		     
         '''),
         ]),
     #Escenario 2 codigo
@@ -183,6 +188,14 @@ try:
                      Sofía: 
         '''),html.Div(children = '''
                      Victor: 
+                     Más del 60% de los cientificos de datos de las empresas son de 
+                     nivel senior. Así mismo, al pago los trabajadores con este nivel 
+                     es a donde las empresas destinan más dinero. 
+                     El hecho de que, pese a haber casi la misma cantidad de empleados con
+                     nivel Entry (practicantes o junior) que de empleados con nivel Mid, 
+                     las empresas destinen el mismo dinero a ambos niveles deja ver lo mal
+                     remunerados en relativo que están los entry. 
+		     
         '''),
         ]),
     #Escenario 3 codigo
@@ -214,7 +227,14 @@ try:
         '''),html.Div(children = '''
                      Sofía: 
         '''),' ',html.Div(children = '''
-                     Victor:
+                     
+		     Victor:
+                     Pese a que si son los empleados menos pagados, los trabajadores de nivel entry pueden 
+                     llegar a tener salario muy buenos. Pero para llegar a tener los mejores salarios, la gente
+                     que quiere entrar a la industria de la ciencia de datos deberá adquirir cococimientos muy 
+                     especificos y epecializaciados como el machine learning, la vision automática o el deep learning.
+                     Afortunadamente, la gran mayoría de empleos ofrecidos a la gente entrante es FT(tiempo completo).
+    
         '''),
         ]),
     #Escenario 4 codigo
@@ -247,7 +267,10 @@ try:
         '''),' ',html.Div(children = '''
                      Sofía: 
         '''),' ',html.Div(children = '''
-                     Victor: 
+                     Victor: Los gráficos revelan las preferencias/posibilades de las empresas. 
+                     Seguramente los trabajos mixtos sean operacionalmente más costos y esto explicaría
+                     que los empleos con proporción remota de 50% sean los menos ofrecidos.
+                     
         '''),
         ]),
     #Escenario 5 codigo
@@ -283,6 +306,15 @@ try:
                      Sofía: 
         '''),' ',html.Div(children = '''
                      Victor: 
+                     En la realidad el nombre del empleo solo permite hacerse una idea muy general
+                     y podría ser imprecisa, ya que no conocemos las funciones y hacerses de cada cargo. El 
+                     nombre puede significar cosas distintas entre distintas empresas. Por ejemplo un data 
+                     scientist también debe tener capacidad de análisis y saber de machine learning.
+                     Dicho esto, justamente los tres empelos que en la industria son los quen en nuestra base 
+                     de datos son los más demandados: Ingeniero de datos, cientifico de datos y analista de 
+                     datos. Y también la distribución salarial es la eseperada; de los tres, el que mas gana
+                     es el ingeniero y el que menos es el analista, aunque la diferencia no es significativa
+                     
         '''),
         ]),
         
@@ -318,7 +350,11 @@ try:
         '''),' ',html.Div(children = '''
                      Sofía: 
         '''),' ',html.Div(children = '''
-                     Victor: 
+                     Victor: Nuestra muesta tiene pocos datos de los años de la pandemia. Pero aún así
+                     podemos concluir que para todos los niveles niveles de empleo, los años pospandemia
+                     son mejores que los años de pandemia. La situación de los empleados sin experiencia
+                     mejora considerablemente pasando de 60 mil dolares por año en pandemia a casi 100 mil
+                     en 2023.
         '''),
         ]),
         
@@ -336,7 +372,12 @@ try:
         '''),html.Div(children = '''
                      Sofía: 
         '''),html.Div(children = '''
-                     Victor: 
+                     Victor: Nuestra muestra tiene información valiosa a cerca del estado de la industria de la
+                     ciencia de datos. A partir de esta podemos responder a la inquietud de si cómo inexpertos jóvenes
+                     desarrolladores esta industria era una donde valía la pena entrar, diciendo que todos los niveles
+                     de experiencia son muy bien compensados económicamente y hay gran variedad de opciones de trabajo 
+                     remoto y presencial. 
+                     
         '''),
         ]),
     ],
