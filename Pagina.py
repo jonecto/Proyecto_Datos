@@ -147,7 +147,11 @@ try:
                      Sin embargo, es muy probable que estos datos vengan de freelancers por 
                      lo que se puede ver en gráficas posteriores.
         '''),' ',html.Div(children = '''
-                     Sofía: 
+                     Sofía: Las empresas donde más ganan los trabajadores son las medianas,
+		     sin una diferencia tan significativa con las grandes que las siguen. 
+		     Por otra parte los 5 países donde se obtienen mejores salarios son Israel,
+		     Puerto Rico, Estados Unidos, Rusia, Canadá y Nueva Zelanda, de esta información
+		     se puede destacar que 3 de ellos se encuentran en América, sea central o del norte. 
         '''),' ',html.Div(children = '''
                      Victor: A la luz de la primera gráfica se puede asegurar que el lugar donde se 
                      sitúan las empresas sí influye en los salarios pagados a los trabajadores de la
@@ -185,7 +189,10 @@ try:
                      misma inversión de los ejecutivos, lo que significa que 
                      son menos remunerados.
         '''),html.Div(children = '''
-                     Sofía: 
+                     Sofía: Los más frecuentes y mejor remunerados resultan ser los 
+		     trabajos dados para el nivel de experiencia Senior. Lo cual indica
+		     que es el nivel de experiencia más solicitado por las empresas y el
+		     cual es económicamente más beneficioso para los trabajadores.
         '''),html.Div(children = '''
                      Victor: 
                      Más del 60% de los cientificos de datos de las empresas son de 
@@ -225,7 +232,8 @@ try:
                      el nombre del trabajo y su complejidad con la remuneración, dado que los empleos mejor pagados
                      son aquellos que requieren mayor preparación.
         '''),html.Div(children = '''
-                     Sofía: 
+                     Sofía:Las mejore expectativas para nivel de entrada de dan para “Científicos aplicados” y lo
+		     más probable es obtener un puesto de tiempo completo. 
         '''),' ',html.Div(children = '''
                      
 		     Victor:
@@ -267,7 +275,10 @@ generalmente es muy cercana (ambas están alrededor de los 1200 empleos ofertado
 se puede observar una clara diferencia con las personas que tienen emoleos mixtos, puesto que
 sus salarios son bastante bajos y no hay mucha oferta en estos tipos de empleo.
         '''),' ',html.Div(children = '''
-                     Sofía: 
+                     Sofía:Las diferencias entre la agrupación de modalidades mixta y presencial y
+		     los trabajos presenciales es insignificante. Aunque los salarios en promedio
+		     de la modalidad virtual y de la modalidad remota se notan similares y mayores
+		     a aquellos en modalidad mixta.
         '''),' ',html.Div(children = '''
                      Victor: Los gráficos revelan las preferencias/posibilades de las empresas. 
                      Seguramente los trabajos mixtos sean operacionalmente más costos y esto explicaría
@@ -308,7 +319,11 @@ se puede observar que los empleos mejor remunerados son aquellos
 que implican alguna clase de liderazgo, sea anejo de proyectos como el 
 cientifico de datos principal o lider de areas como el lider de analistas de datos.
         '''),' ',html.Div(children = '''
-                     Sofía: 
+                     Sofía:Los salarios con más disponibilidad de empleo son para títulos de empleo con
+		     relación a la ingeniería, como por ejemplo “Ingeniero de datos”, “Ingeniero de 
+		     Aprendizaje de Máquina” e “Ingeniero de análisis”. Pero, por otra parte, los títulos
+		     de empleo que más dinero ganan en promedio son aquellos que se relacionan con el liderazgo.
+		     Los que aparecen en ambos gráficos son los “Analistas de datos” y “Científicos de datos”. 
         '''),' ',html.Div(children = '''
                      Victor: 
                      En la realidad el nombre del empleo solo permite hacerse una idea muy general
@@ -354,7 +369,10 @@ en general no hay mucha relación con los años, dada la fluctuación
 grande entre fechas y la poca relación con eventos globales como 
 la pandemia.
         '''),' ',html.Div(children = '''
-                     Sofía: 
+                     Sofía: Cuando se toma la agrupación de nivel de experiencia se ve que una clara
+		     tendencia a que los salarios aumentan con el transcurso del tiempo. Mientras en
+		     la agrupación por tipo de empleo presenta una disminución en los salarios para el
+		     año 2023. En especial para los Freelance y Contractor.
         '''),' ',html.Div(children = '''
                      Victor: Nuestra muesta tiene pocos datos de los años de la pandemia. Pero aún así
                      podemos concluir que para todos los niveles niveles de empleo, los años pospandemia
@@ -379,7 +397,25 @@ la pandemia.
                      carga de datos masiva, etc) y la creación de gráficas y una página web me pareció 
                      interesante y siento que enriqueció mis conocimientos.
         '''),html.Div(children = '''
-                     Sofía: 
+                     Sofía:•Las expectativas salariales según empresa rondan el intervalo de 10.00 a 200.000 dólares y no
+		     suelen superar los 100.000, lo cual como expectativa mensual es algo bajo. Por otra parte, las mejores 
+		     empresas para trabajar son las medianas de los países Israel, Puerto Rico y Estados Unidos. 
+	'''),html.Div(children = '''
+			Según los datos vale totalmente la pena llegar al nivel de experiencia Senior a pesar del esfuerzo,
+			ya que este es el más solicitado y con mejor expectativa salarial. Aunque se evidencia que los trabajos 
+			de nivel de entrada son bien remunerados y tienen una gran proporción de ser de tiempo completo, lo cual 
+			es positivo al aumentar los ingresos económicos.
+	'''),html.Div(children = '''
+			No se presenta una diferencia significativa entre la oferta de trabajos o salarios de los empleos
+			remotos o mixtos con respecto a los trabajos presenciales. Aunque si se ve una diferencia de ingresos 
+			negativa para los trabajos mixtos. Teniendo en cuenta que los trabajos presenciales ameritan un mayor 
+			gasto para el trabajador, se considera que lo mejor es aspirar a un trabajo remoto.
+	'''),html.Div(children = '''
+			Agrupando los trabajos por nivel de experiencia se nota un aumento en los salarios a través 
+			del tiempo lo cual indica una buena expectativa para el futuro cerca. Por otra parte, al agrupar por 
+			tipo de empleo se obtienen datos desalentadores en el año 2023. Esto indica que según el nivel de 
+			experiencia que se tenga el contexto es alentador pero se debe tener cuidado al considerar trabajos
+			según el tipo de empleo.
         '''),html.Div(children = '''
                      Victor: Nuestra muestra tiene información valiosa a cerca del estado de la industria de la
                      ciencia de datos. A partir de esta podemos responder a la inquietud de si cómo inexpertos jóvenes
