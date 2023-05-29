@@ -311,13 +311,13 @@ sus salarios son bastante bajos y no hay mucha oferta en estos tipos de empleo.
             html.H3(children = 'Análisis:'),
             html.Div(children = '''
                      Nicolás: 
-Se puede evidenciar dentro de las gráficas 
-que los empleos más demandados generalmente 
-aquellos que requieren mucha más preparación, como lo es
-el ingeniero de Machine Learning, o el Ingeniero de Datos. Adicional a esto 
-se puede observar que los empleos mejor remunerados son aquellos 
-que implican alguna clase de liderazgo, sea anejo de proyectos como el 
-cientifico de datos principal o lider de areas como el lider de analistas de datos.
+            Se puede evidenciar dentro de las gráficas 
+            que los empleos más demandados generalmente 
+            aquellos que requieren mucha más preparación, como lo es
+            el ingeniero de Machine Learning, o el Ingeniero de Datos. Adicional a esto 
+            se puede observar que los empleos mejor remunerados son aquellos 
+            que implican alguna clase de liderazgo, sea anejo de proyectos como el 
+            cientifico de datos principal o lider de areas como el lider de analistas de datos.
         '''),' ',html.Div(children = '''
                      Sofía:Los salarios con más disponibilidad de empleo son para títulos de empleo con
 		     relación a la ingeniería, como por ejemplo “Ingeniero de datos”, “Ingeniero de 
